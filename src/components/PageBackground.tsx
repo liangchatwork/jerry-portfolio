@@ -1,7 +1,6 @@
 import { useSlideshow } from "./SlideshowContext";
 
 export default function PageBackground() {
-  const base = import.meta.env.BASE_URL;
 
   const { slides, currentSlide, previousSlide } = useSlideshow();
 
