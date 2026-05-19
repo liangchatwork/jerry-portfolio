@@ -1,25 +1,38 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useSlideshow } from "../components/SlideshowContext";
 
 export default function Home() {
 
     const base = import.meta.env.BASE_URL;
-  
+
+    const { slides, currentSlide, previousSlide } = useSlideshow();
+
     return (
         <main className="min-h-screen bg-[#eef2f0] text-stone-900">
         <section className="relative min-h-[100svh] overflow-hidden px-4 py-5 sm:px-6 md:px-10 md:py-8">
           {/* Top Bar */}
           <Header light />
   
-          {/* Main Visual */}
-          <div className="absolute inset-0 animate-image-reveal delay-100">
+          {/* Main Visual Slideshow */}
+          <div className="absolute inset-0 overflow-hidden animate-image-reveal delay-100">
+            {previousSlide !== null && (
+              <img
+                key={`previous-${previousSlide}`}
+                src={slides[previousSlide]}
+                alt="Previous background"
+                className="absolute inset-0 z-10 h-[112%] w-full object-cover object-center animate-slide-fade-out"
+              />
+            )}
+
             <img
-              src={`${base}profile.jpg`}
-              alt="Jerry in the mountains"
-              className="h-full w-full object-cover object-[center_100%]"
+              key={`current-${currentSlide}`}
+              src={slides[currentSlide]}
+              alt="Current background"
+              className="absolute inset-0 z-0 h-[112%] w-full object-cover object-center animate-slide-current"
             />
 
-            <div className="absolute inset-0 bg-black/20" />
+            <div className="absolute inset-0 z-20 bg-black/20" />
           </div>
   
           {/* Big Title */}

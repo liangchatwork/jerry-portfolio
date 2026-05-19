@@ -82,3 +82,49 @@ body,
   width: 100%;
   overflow-x: hidden;
 }
+
+@keyframes slidePanUp {
+  0% {
+    transform: translate3d(0, -10%, 0) scale(1.03);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.03);
+  }
+}
+
+@keyframes slideFadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideFadeOut {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1.03);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(1.03);
+  }
+}
+
+.animate-slide-current {
+  animation:
+    slideFadeIn 1.6s ease-out both,
+    slidePanUp 10s linear both;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+
+.animate-slide-fade-out {
+  animation: slideFadeOut 1.6s ease-out both;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}

@@ -1,16 +1,30 @@
+import { useSlideshow } from "./SlideshowContext";
+
 export default function PageBackground() {
-    const base = import.meta.env.BASE_URL;
-  
-    return (
-      <div className="fixed inset-0 -z-10">
+  const base = import.meta.env.BASE_URL;
+
+  const { slides, currentSlide, previousSlide } = useSlideshow();
+
+  return (
+    <div className="fixed inset-0 -z-10 overflow-hidden">
+      {previousSlide !== null && (
         <img
-          src={`${base}profile.jpg`}
-          alt="Snow mountain background"
-          className="h-full w-full object-cover object-[center_100%]"
+          key={`previous-${previousSlide}`}
+          src={slides[previousSlide]}
+          alt="Previous blurred background"
+          className="absolute inset-0 z-10 h-[112%] w-full object-cover object-center blur-md animate-slide-fade-out"
         />
-  
-        <div className="absolute inset-0 bg-[#f4f1ea]/70 backdrop-blur-md" />
-        <div className="absolute inset-0 bg-black/10" />
-      </div>
-    );
-  }
+      )}
+
+      <img
+        key={`current-${currentSlide}`}
+        src={slides[currentSlide]}
+        alt="Current blurred background"
+        className="absolute inset-0 z-0 h-[112%] w-full object-cover object-center blur-md animate-slide-current"
+      />
+
+      <div className="absolute inset-0 z-20 bg-[#eef2f0]/70" />
+      <div className="absolute inset-0 z-30 bg-black/10" />
+    </div>
+  );
+}
