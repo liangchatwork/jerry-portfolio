@@ -23,7 +23,7 @@ export default function Home() {
           </div>
   
           {/* Big Title */}
-          <div className="relative z-10 flex min-h-[calc(100svh-6rem)] items-end pb-10 pl-5 animate-fade-up delay-300 sm:pl-8 md:pb-14 md:pl-12 lg:pb-16 lg:pl-16">
+          <div className="relative z-10 flex min-h-[calc(100svh-6rem)] items-end pb-28 pl-5 animate-fade-up delay-300 sm:pl-8 md:pb-24 md:pl-12 lg:pb-28 lg:pl-16">
             <div>
               <h1 className="text-[18vw] font-black uppercase leading-[0.96] tracking-[-0.025em] text-white sm:text-[14vw] md:text-[8vw] lg:text-[6.6vw]">
                 阿昏
