@@ -6,20 +6,20 @@ export default function Home() {
     const base = import.meta.env.BASE_URL;
   
     return (
-        <main className="min-h-screen bg-[#f4f1ea] text-stone-900">
+        <main className="min-h-screen bg-[#eef2f0] text-stone-900">
         <section className="relative min-h-[100svh] overflow-hidden px-4 py-5 sm:px-6 md:px-10 md:py-8">
           {/* Top Bar */}
-          <Header />
+          <Header light />
   
           {/* Main Visual */}
-          <div className="absolute inset-x-4 bottom-6 top-40 overflow-hidden rounded-[1.5rem] animate-image-reveal delay-100 sm:top-36 md:inset-x-10 md:bottom-10 md:top-28 md:rounded-[2rem]">
+          <div className="absolute inset-0 animate-image-reveal delay-100">
             <img
               src={`${base}profile.jpg`}
               alt="Jerry in the mountains"
               className="h-full w-full object-cover object-[center_100%]"
             />
-  
-            <div className="absolute inset-0 bg-black/10" />
+
+            <div className="absolute inset-0 bg-black/20" />
           </div>
   
           {/* Big Title */}
@@ -36,9 +36,10 @@ export default function Home() {
               </p>
             </div>
           </div>
+          <div className="absolute bottom-4 left-0 right-0 z-20">
+            <Footer light />
+          </div>
         </section>
-        
-        <Footer />
         
       </main>
     );

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PageBackground from "../components/PageBackground";
 
 type UnderConstructionProps = {
   title: string;
@@ -19,7 +20,8 @@ export default function UnderConstruction({
   ];
 
   return (
-    <main className="min-h-screen min-w-[1280px] bg-[#f4f1ea] text-stone-900">
+    <main className="relative min-h-screen bg-transparent text-stone-900">
+      <PageBackground />
       <section className="relative min-h-screen overflow-hidden px-6 py-6 md:px-10 md:py-8">
         {/* Top Bar */}
         <header className="relative z-20 grid grid-cols-[180px_1fr_180px] items-start animate-nav-fade">

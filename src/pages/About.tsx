@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import PageBackground from "../components/PageBackground";
 
 export default function About() {
   const base = import.meta.env.BASE_URL;
@@ -45,7 +46,8 @@ export default function About() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#f4f1ea] text-stone-900">
+    <main className="relative min-h-screen bg-transparent text-stone-900">
+      <PageBackground />
       <section className="relative px-4 py-5 sm:px-6 md:px-10 md:py-8">
         {/* Top Bar */}
         <Header />
@@ -96,9 +98,15 @@ export default function About() {
                   section.reverse ? "md:order-1" : ""
                 }`}
               >
-                <p className="text-xs uppercase tracking-[0.42em] text-stone-500">
-                  {String(index + 1).padStart(2, "0")} / {section.label}
-                </p>
+                <div className="flex items-center gap-5">
+                  <span className="text-5xl font-black tracking-[-0.08em] text-stone-300">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  <p className="text-xs uppercase tracking-[0.42em] text-stone-500">
+                    {section.label}
+                  </p>
+                </div>
 
                 <h2 className="mt-7 max-w-2xl text-3xl font-black leading-tight tracking-[-0.04em] text-stone-900 md:text-4xl">
                   {section.title}
