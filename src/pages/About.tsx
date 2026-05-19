@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 export default function About() {
+  const base = import.meta.env.BASE_URL;
+
   const navItems = [
     ["ABOUT", "關於我", "/about"],
     ["RESUME", "履歷", "/resume"],
@@ -14,7 +16,7 @@ export default function About() {
     {
       label: "PROFILE / 個人簡介",
       title: "哈囉，我是阿昏 Jerry。",
-      image: "/about-1.jpg",
+      image: `${base}about-1.jpg`,
       reverse: false,
       paragraphs: [
         "今年 25 歲，畢業於 NCKU CSIE 研究所。",
@@ -25,7 +27,7 @@ export default function About() {
     {
       label: "MUSIC / ANIME / DRAMA",
       title: "我呢 ... 本質是宅宅。",
-      image: "/about-2.jpg",
+      image: `${base}about-2.jpg`,
       reverse: true,
       paragraphs: [
         "喜歡的音樂風格有 J-pop、動漫歌曲、2000 年代到 2010 年初的華語抒情歌與西洋搖滾。",
@@ -38,7 +40,7 @@ export default function About() {
     {
       label: "OUTDOOR / TRAVEL / NOW",
       title: "另外，我還算是個 Outdoor 咖。",
-      image: "/about-3.jpg",
+      image: `${base}about-3.jpg`,
       reverse: false,
       paragraphs: [
         "全台灣跑透透外，日本去過四次，遍及關西、北陸、北海道、九州。",

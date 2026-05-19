@@ -9,6 +9,8 @@ export default function Home() {
         ["TRAVEL", "旅遊紀錄", "/travel"],
         ["PROJECTS", "專案", "/projects"],
       ];
+
+    const base = import.meta.env.BASE_URL;
   
     return (
         <main className="min-h-screen min-w-[1280px] bg-[#f4f1ea] text-stone-900">
@@ -112,7 +114,7 @@ export default function Home() {
           {/* Main Visual */}
           <div className="absolute inset-x-6 bottom-8 top-28 overflow-hidden rounded-[2rem] md:inset-x-10 md:bottom-10 md:top-28 animate-image-reveal delay-100">
             <img
-              src="/profile.jpg"
+              src={`${base}profile.jpg`}
               alt="Jerry in the mountains"
               className="h-full w-full object-cover object-[center_85%]"
             />
