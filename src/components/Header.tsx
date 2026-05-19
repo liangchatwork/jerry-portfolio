@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 
-export default function Header({ light = false }: { light?: boolean }) {
+export default function Header({
+  light = false,
+  map = false,
+}: {
+  light?: boolean;
+  map?: boolean;
+}) {
   const navItems = [
     ["ABOUT", "關於我", "/about"],
     ["RESUME", "履歷", "/resume"],
@@ -16,7 +22,11 @@ export default function Header({ light = false }: { light?: boolean }) {
   const iconFilter = light ? "invert" : "";
 
   return (
-    <header className="relative z-20 flex flex-wrap items-start justify-between gap-y-5 animate-nav-fade lg:grid lg:grid-cols-[180px_1fr_180px] lg:items-start">
+    <header
+      className={`relative z-20 flex flex-wrap items-start justify-between gap-y-5 animate-nav-fade lg:grid lg:grid-cols-[180px_1fr_180px] lg:items-start ${
+        map ? "-mx-10 -mt-8 bg-[#dcecf3] px-10 py-8" : ""
+      }`}
+    >
       {/* Left Brand */}
       <Link
         to="/"

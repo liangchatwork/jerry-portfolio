@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import UnderConstruction from "./pages/UnderConstruction";
 import { SlideshowProvider } from "./components/SlideshowContext";
+import Travel from "./pages/Travel";
 
 export default function App() {
   return (
@@ -26,10 +27,7 @@ export default function App() {
           element={<UnderConstruction title="DRAMA" subtitle="追劇" />}
         />
 
-        <Route
-          path="/travel"
-          element={<UnderConstruction title="TRAVEL" subtitle="旅遊紀錄" />}
-        />
+        <Route path="/travel" element={<Travel />} />
 
         <Route
           path="/projects"
