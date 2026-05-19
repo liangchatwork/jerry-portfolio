@@ -1,16 +1,8 @@
-import { Link } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function About() {
   const base = import.meta.env.BASE_URL;
-
-  const navItems = [
-    ["ABOUT", "關於我", "/about"],
-    ["RESUME", "履歷", "/resume"],
-    ["MUSIC", "音樂", "/music"],
-    ["DRAMA", "追劇", "/drama"],
-    ["TRAVEL", "旅遊紀錄", "/travel"],
-    ["PROJECTS", "專案", "/projects"],
-  ];
 
   const sections = [
     {
@@ -53,115 +45,18 @@ export default function About() {
   ];
 
   return (
-    <main className="min-h-screen min-w-[1280px] bg-[#f4f1ea] text-stone-900">
-      <section className="relative px-6 py-6 md:px-10 md:py-8">
+    <main className="min-h-screen bg-[#f4f1ea] text-stone-900">
+      <section className="relative px-4 py-5 sm:px-6 md:px-10 md:py-8">
         {/* Top Bar */}
-        <header className="relative z-20 grid grid-cols-[180px_1fr_180px] items-start animate-nav-fade">
-          {/* Left Brand */}
-          <Link
-            to="/"
-            className="text-xs uppercase tracking-[0.32em] text-stone-800 transition hover:text-stone-500"
-          >
-            <p>A-HSUN JERRY</p>
-            <p className="mt-1 text-stone-500">PORTFOLIO / 2026</p>
-          </Link>
-
-          {/* Center Navigation */}
-          <nav className="hidden justify-center gap-12 md:flex">
-            {navItems.map(([en, zh, href]) => (
-              <Link
-                key={en}
-                to={href}
-                className="group text-center transition hover:text-stone-500"
-              >
-                <p className="text-xs uppercase tracking-[0.35em] text-stone-900">
-                  {en}
-                </p>
-                <p className="mt-2 text-[11px] tracking-[0.25em] text-stone-500">
-                  {zh}
-                </p>
-              </Link>
-            ))}
-          </nav>
-
-          {/* Right Social Icons */}
-          <div className="hidden justify-end gap-5 md:flex">
-            <a
-                href="https://www.youtube.com/@A-HsunJerry"
-                target="_blank"
-                className="transition hover:opacity-50"
-                aria-label="YouTube"
-                >
-                <img
-                    src="https://cdn.simpleicons.org/youtube/292524"
-                    alt="YouTube"
-                    className="h-[18px] w-[18px]"
-                />
-                </a>
-            <a
-              href="mailto:liangchatwork@gmail.com"
-              className="transition hover:opacity-50"
-              aria-label="Gmail"
-            >
-              <img
-                src="https://cdn.simpleicons.org/gmail/292524"
-                alt="Gmail"
-                className="h-[18px] w-[18px]"
-              />
-            </a>
-
-            <a
-              href="https://www.instagram.com/hsunjerry_liang"
-              target="_blank"
-              className="transition hover:opacity-50"
-              aria-label="Instagram"
-            >
-              <img
-                src="https://cdn.simpleicons.org/instagram/292524"
-                alt="Instagram"
-                className="h-[18px] w-[18px]"
-              />
-            </a>
-
-            <a
-              href="https://www.linkedin.com/in/hsunjerry-liang/"
-              target="_blank"
-              className="transition hover:opacity-50"
-              aria-label="LinkedIn"
-            >
-              <img
-                src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg"
-                alt="LinkedIn"
-                className="h-[18px] w-[18px] opacity-80"
-                style={{
-                  filter:
-                    "brightness(0) saturate(100%) invert(13%) sepia(8%) saturate(1100%) hue-rotate(345deg) brightness(92%) contrast(89%)",
-                }}
-              />
-            </a>
-
-            <a
-              href="https://github.com/liangchatwork"
-              target="_blank"
-              className="transition hover:opacity-50"
-              aria-label="GitHub"
-            >
-              <img
-                src="https://cdn.simpleicons.org/github/292524"
-                alt="GitHub"
-                className="h-[18px] w-[18px]"
-              />
-            </a>
-          </div>
-        </header>
+        <Header />
 
         {/* Page Title */}
-        <section className="mx-auto max-w-7xl pt-24 pb-12">
+        <section className="mx-auto max-w-7xl pt-16 pb-12 md:pt-24">
           <p className="animate-fade-up text-xs uppercase tracking-[0.45em] text-stone-500">
             ABOUT ME / 關於我
           </p>
 
-          <h1 className="animate-fade-up delay-100 mt-6 text-7xl font-black uppercase leading-[0.88] tracking-[-0.07em] text-stone-900">
+          <h1 className="animate-fade-up delay-100 mt-6 text-5xl font-black uppercase leading-[0.9] tracking-[-0.06em] text-stone-900 sm:text-6xl md:text-7xl">
             A-Hsun
             <br />
             Jerry
@@ -170,11 +65,11 @@ export default function About() {
         </section>
 
         {/* Three About Parts */}
-        <div className="mx-auto max-w-7xl space-y-32 pb-32">
+        <div className="mx-auto max-w-7xl space-y-24 pb-24 md:space-y-32 md:pb-32">
           {sections.map((section, index) => (
             <section
               key={section.label}
-              className={`grid min-h-[720px] items-center gap-16 ${
+              className={`grid items-center gap-10 md:min-h-[720px] md:gap-16 ${
                 section.reverse
                   ? "md:grid-cols-[1.05fr_0.95fr]"
                   : "md:grid-cols-[0.95fr_1.05fr]"
@@ -186,7 +81,7 @@ export default function About() {
                   section.reverse ? "md:order-2" : ""
                 }`}
               >
-                <div className="aspect-[4/5] overflow-hidden rounded-[2rem] bg-stone-200 shadow-2xl">
+                <div className="aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-stone-200 shadow-2xl md:rounded-[2rem]">
                   <img
                     src={section.image}
                     alt={section.label}
@@ -205,11 +100,11 @@ export default function About() {
                   {String(index + 1).padStart(2, "0")} / {section.label}
                 </p>
 
-                <h2 className="mt-7 max-w-2xl text-4xl font-black leading-tight tracking-[-0.04em] text-stone-900">
+                <h2 className="mt-7 max-w-2xl text-3xl font-black leading-tight tracking-[-0.04em] text-stone-900 md:text-4xl">
                   {section.title}
                 </h2>
 
-                <div className="mt-10 max-w-2xl space-y-7 text-[18px] leading-9 tracking-wide text-stone-700">
+                <div className="mt-8 max-w-2xl space-y-6 text-[16px] leading-8 tracking-wide text-stone-700 md:mt-10 md:space-y-7 md:text-[18px] md:leading-9">
                   {section.paragraphs.map((text, paragraphIndex) => (
                     <p
                       key={paragraphIndex}
@@ -227,6 +122,9 @@ export default function About() {
           ))}
         </div>
       </section>
+
+      <Footer />
+
     </main>
   );
 }
