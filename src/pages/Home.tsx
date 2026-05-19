@@ -36,7 +36,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="absolute bottom-4 left-0 right-0 z-20">
+          <div className="absolute bottom-3 left-0 right-0 z-20 block md:block">
             <Footer light />
           </div>
         </section>
