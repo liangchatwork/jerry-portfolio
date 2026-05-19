@@ -1,11 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { travelPlaces } from "../data/travelPlaces";
-import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from "react-leaflet";
+import { travelPlaces, type TravelPlace } from "../data/travelPlaces";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  useMap,
+  useMapEvents,
+} from "react-leaflet";
 import L from "leaflet";
-
-type TravelPlace = (typeof travelPlaces)[number];
 
 function MapController({
   selectedPlace,

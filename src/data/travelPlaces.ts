@@ -1,4 +1,36 @@
-export const travelPlaces = [
+export type TravelContentBlock =
+  | {
+      type: "text";
+      content: string;
+    }
+  | {
+      type: "image";
+      src: string;
+      alt?: string;
+      caption?: string;
+    }
+  | {
+      type: "imageGrid";
+      images: {
+        src: string;
+        alt?: string;
+        caption?: string;
+      }[];
+    };
+
+export type TravelPlace = {
+  id: string;
+  name: string;
+  country: string;
+  zhName: string;
+  title?: string;
+  coordinates: [number, number];
+  youtubeId?: string;
+  description: string;
+  contentBlocks: TravelContentBlock[];
+};
+
+export const travelPlaces: TravelPlace[] = [
     {
       id: "shirakawago",
       name: "Shirakawa-go",
