@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PageBackground from "../components/PageBackground";
+
+const RESUME_LOCKED = true;
 
 const education = [
   {
@@ -231,6 +233,19 @@ export default function Resume() {
   const [activeSection, setActiveSection] =
     useState<ResumeSection>("education");
   const [isFading, setIsFading] = useState(false);
+  const [showResumePreview, setShowResumePreview] = useState(true);
+
+  const shouldBlurResume = RESUME_LOCKED && !showResumePreview;
+
+  useEffect(() => {
+    if (!RESUME_LOCKED) return;
+
+    const timer = window.setTimeout(() => {
+      setShowResumePreview(false);
+    }, 1000);
+
+    return () => window.clearTimeout(timer);
+  }, []);
 
   function handleSectionChange(section: ResumeSection) {
     if (section === activeSection) return;
@@ -250,80 +265,111 @@ export default function Resume() {
       <section className="relative z-10 px-4 py-4 sm:px-6 md:px-10 md:py-8">
         <Header />
 
-      {/* Page Title */}
-      <section className="mx-auto max-w-7xl pt-12 pb-10 md:pt-24 md:pb-12">
-        <p className="animate-fade-up text-[11px] uppercase tracking-[0.42em] text-stone-600 md:text-xs md:tracking-[0.45em]">
-          RESUME / 履歷
-        </p>
+        {/* Page Title */}
+        <section className="mx-auto max-w-7xl pt-12 pb-10 md:pt-24 md:pb-12">
+          <p className="animate-fade-up text-[11px] uppercase tracking-[0.42em] text-stone-600 md:text-xs md:tracking-[0.45em]">
+            RESUME / 履歷
+          </p>
 
-        <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,680px)_520px] lg:items-stretch lg:gap-14 xl:grid-cols-[minmax(0,700px)_560px]">
-          {/* Left: Name + Brief Intro */}
-          <div className="order-2 flex flex-col lg:order-1">
-            <h1 className="animate-fade-up delay-100 text-4xl font-black uppercase leading-[0.9] tracking-[-0.06em] text-stone-950 drop-shadow-sm sm:text-5xl md:text-7xl">
-              Chen-Hsun
-              <br />
-              Jerry
-              <br />
-              Liang
-            </h1>
+          <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,680px)_520px] lg:items-stretch lg:gap-14 xl:grid-cols-[minmax(0,700px)_560px]">
+            {/* Left: Name + Brief Intro */}
+            <div className="order-2 flex flex-col lg:order-1">
+              <h1 className="animate-fade-up delay-100 text-4xl font-black uppercase leading-[0.9] tracking-[-0.06em] text-stone-950 drop-shadow-sm sm:text-5xl md:text-7xl">
+                Chen-Hsun
+                <br />
+                Jerry
+                <br />
+                Liang
+              </h1>
 
-            {/* Brief Intro */}
-            <ul className="animate-fade-up delay-200 mt-8 max-w-2xl space-y-5 rounded-[1.5rem] border border-white/65 bg-white/55 p-5 text-[15px] leading-7 tracking-wide text-stone-800 shadow-xl backdrop-blur-xl md:space-y-6 md:p-6 md:text-[17px] md:leading-8 lg:mt-auto">
-              <li className="flex gap-4">
-                <span className="mt-3 h-2 w-2 shrink-0 rounded-full bg-stone-900" />
-                <div>
-                  <p>
-                    國立成功大學資訊工程學系碩士，ISMP 實驗室 R&amp;D、Software
-                    Engineer，預計 2026 年 7 月畢業。
-                  </p>
-                  <p className="mt-2 text-sm italic leading-6 text-stone-600 md:text-[15px]">
-                    Master's student in Computer Science and Information Engineering
-                    at National Cheng Kung University, serving as R&amp;D and Software
-                    Engineer at the ISMP Lab. Expected to graduate in July 2026.
-                  </p>
-                </div>
-              </li>
+              {/* Brief Intro */}
+              <div className="relative mt-8 max-w-2xl lg:mt-auto">
+                <ul
+                  className={`animate-fade-up delay-200 space-y-5 rounded-[1.5rem] border border-white/65 bg-white/55 p-5 text-[15px] leading-7 tracking-wide text-stone-800 shadow-xl backdrop-blur-xl transition-all duration-1000 ease-in-out md:space-y-6 md:p-6 md:text-[17px] md:leading-8 ${
+                    shouldBlurResume
+                      ? "pointer-events-none select-none blur-[8px] opacity-45"
+                      : "blur-0 opacity-100"
+                  }`}
+                >
+                  <li className="flex gap-4">
+                    <span className="mt-3 h-2 w-2 shrink-0 rounded-full bg-stone-900" />
+                    <div>
+                      <p>
+                        國立成功大學資訊工程學系碩士，ISMP 實驗室 R&amp;D、Software
+                        Engineer，預計 2026 年 7 月畢業。
+                      </p>
+                      <p className="mt-2 text-sm italic leading-6 text-stone-600 md:text-[15px]">
+                        Master's student in Computer Science and Information
+                        Engineering at National Cheng Kung University, serving
+                        as R&amp;D and Software Engineer at the ISMP Lab.
+                        Expected to graduate in July 2026.
+                      </p>
+                    </div>
+                  </li>
 
-              <li className="flex gap-4">
-                <span className="mt-3 h-2 w-2 shrink-0 rounded-full bg-stone-900" />
-                <div>
-                  <p>專注於資安、密碼學、AI 應用與軟體工程。</p>
-                  <p className="mt-2 text-sm italic leading-6 text-stone-600 md:text-[15px]">
-                    Focused on Cybersecurity, Cryptography, AI Applications, and
-                    Software Engineering.
-                  </p>
-                </div>
-              </li>
+                  <li className="flex gap-4">
+                    <span className="mt-3 h-2 w-2 shrink-0 rounded-full bg-stone-900" />
+                    <div>
+                      <p>專注於資安、密碼學、AI 應用與軟體工程。</p>
+                      <p className="mt-2 text-sm italic leading-6 text-stone-600 md:text-[15px]">
+                        Focused on Cybersecurity, Cryptography, AI Applications,
+                        and Software Engineering.
+                      </p>
+                    </div>
+                  </li>
 
-              <li className="flex gap-4">
-                <span className="mt-3 h-2 w-2 shrink-0 rounded-full bg-stone-900" />
-                <div>
-                  <p>曾赴德國慕尼黑工業大學 TUM Informatics 交換。</p>
-                  <p className="mt-2 text-sm italic leading-6 text-stone-600 md:text-[15px]">
-                    Exchange experience in Informatics at the Technical University of
-                    Munich (TUM) in Germany.
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
+                  <li className="flex gap-4">
+                    <span className="mt-3 h-2 w-2 shrink-0 rounded-full bg-stone-900" />
+                    <div>
+                      <p>曾赴德國慕尼黑工業大學 TUM Informatics 交換。</p>
+                      <p className="mt-2 text-sm italic leading-6 text-stone-600 md:text-[15px]">
+                        Exchange experience in Informatics at the Technical
+                        University of Munich (TUM) in Germany.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
 
-          {/* Portrait */}
-          <div className="animate-image-reveal order-1 mx-auto w-full max-w-[260px] sm:max-w-[300px] lg:order-2 lg:mx-0 lg:h-full lg:max-w-none">
-            <div className="aspect-[3/4] overflow-hidden rounded-[2rem] border border-white/65 bg-white/45 shadow-2xl backdrop-blur-xl lg:aspect-auto lg:h-full">
-              <img
-                src={`${import.meta.env.BASE_URL}resume-profile.jpg`}
-                alt="Chen-Hsun Jerry Liang"
-                className="h-full w-full object-cover object-center"
-              />
+                {RESUME_LOCKED && (
+                  <div
+                    className={`absolute inset-0 z-20 flex items-center justify-center rounded-[1.5rem] border border-white/60 bg-white/45 px-5 text-center shadow-xl backdrop-blur-md transition-all duration-1000 ease-in-out ${
+                      shouldBlurResume
+                        ? "opacity-100"
+                        : "pointer-events-none opacity-0"
+                    }`}
+                  >
+                    <p className="text-sm font-semibold leading-7 tracking-[0.18em] text-stone-800 md:text-base">
+                      比我更猛的比比皆是，
+                      <br />
+                      所以我先不自曝其短了...
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Portrait */}
+            <div className="animate-image-reveal order-1 mx-auto w-full max-w-[280px] sm:max-w-[320px] lg:order-2 lg:mx-0 lg:h-full lg:max-w-none">
+              <div className="aspect-[3/4] overflow-hidden rounded-[2rem] border border-white/65 bg-white/45 shadow-2xl backdrop-blur-xl lg:aspect-auto lg:h-full">
+                <img
+                  src={`${import.meta.env.BASE_URL}resume-profile.jpg`}
+                  alt="Chen-Hsun Jerry Liang"
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Resume Content */}
-        <div className="mx-auto max-w-7xl pb-20 md:pb-32">
-          <div className="rounded-[1.5rem] border border-white/65 bg-white/55 p-4 shadow-xl backdrop-blur-xl md:rounded-[2rem] md:p-6">
+        {/* Resume Content */}
+        <div className="relative mx-auto max-w-7xl pb-20 md:pb-32">
+          <div
+            className={`rounded-[1.5rem] border border-white/65 bg-white/55 p-4 shadow-xl backdrop-blur-xl transition-all duration-1000 ease-in-out md:rounded-[2rem] md:p-6 ${
+              shouldBlurResume
+                ? "pointer-events-none select-none blur-[9px] opacity-45"
+                : "blur-0 opacity-100"
+            }`}
+          >
             {/* Hidden Scroll Menu */}
             <div className="scrollbar-hide -mx-4 overflow-x-auto border-y border-stone-400/40 px-4 py-4 md:mx-0 md:px-0 md:py-5">
               <div className="mx-auto flex w-fit min-w-max justify-center gap-8 md:gap-16">
@@ -572,6 +618,28 @@ export default function Resume() {
               )}
             </div>
           </div>
+
+          {RESUME_LOCKED && (
+            <div
+            className={`absolute inset-x-0 top-0 z-20 flex min-h-[360px] items-start justify-center rounded-[1.5rem] bg-white/35 px-5 pt-20 text-center backdrop-blur-sm transition-all duration-1000 ease-in-out md:inset-0 md:items-center md:pt-0 md:rounded-[2rem] ${
+                shouldBlurResume
+                  ? "opacity-100"
+                  : "pointer-events-none opacity-0"
+              }`}
+            >
+              <div className="max-w-xl rounded-[1.5rem] border border-white/70 bg-white/70 px-6 py-8 shadow-2xl backdrop-blur-xl md:px-10 md:py-10">
+                <p className="text-[11px] uppercase tracking-[0.35em] text-stone-500">
+                  Resume Temporarily Hidden
+                </p>
+
+                <p className="mt-5 text-sm font-semibold leading-8 tracking-[0.18em] text-stone-700 md:text-base">
+                  比我更猛的比比皆是，
+                  <br />
+                  所以我先不自曝其短了...
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
