@@ -10,9 +10,9 @@ export default function Header({
   const navItems = [
     ["ABOUT", "關於我", "/about"],
     ["RESUME", "履歷", "/resume"],
+    ["TRAVEL", "旅遊紀錄", "/travel"],
     ["MUSIC", "音樂", "/music"],
     ["DRAMA", "追劇", "/drama"],
-    ["TRAVEL", "旅遊紀錄", "/travel"],
     ["PROJECTS", "專案", "/projects"],
   ];
 

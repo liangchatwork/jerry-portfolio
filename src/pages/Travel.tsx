@@ -11,27 +11,35 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 
-type TravelRegion = "taiwan" | "asia" | "westernEurope";
+type TravelRegion = "taiwan" | "eastAsia" | "westernEurope";
 
 const travelRegions: {
   key: TravelRegion;
   label: string;
   zhLabel: string;
+  center: [number, number];
+  zoom: number;
 }[] = [
   {
     key: "taiwan",
     label: "Taiwan",
     zhLabel: "台灣",
+    center: [23.7, 121],
+    zoom: 5,
   },
   {
-    key: "asia",
-    label: "Asia",
-    zhLabel: "亞洲",
+    key: "eastAsia",
+    label: "East Asia",
+    zhLabel: "東亞",
+    center: [35.5, 136.5],
+    zoom: 5,
   },
   {
     key: "westernEurope",
     label: "Western Europe",
     zhLabel: "西歐",
+    center: [48.2, 11.5],
+    zoom: 5,
   },
 ];
 
@@ -51,7 +59,7 @@ function getTravelRegion(place: TravelPlace): TravelRegion {
     country.includes("singapore") ||
     country.includes("malaysia")
   ) {
-    return "asia";
+    return "eastAsia";
   }
 
   return "westernEurope";
@@ -59,9 +67,11 @@ function getTravelRegion(place: TravelPlace): TravelRegion {
 
 function MapController({
   selectedPlace,
+  activeRegion,
   onZoomChange,
 }: {
   selectedPlace: TravelPlace | null;
+  activeRegion: TravelRegion;
   onZoomChange: (zoom: number) => void;
 }) {
   const map = useMap();
@@ -77,9 +87,14 @@ function MapController({
 
   useEffect(() => {
     if (!selectedPlace) {
-      map.flyTo([23.7, 121], 5, {
+      const region =
+        travelRegions.find((item) => item.key === activeRegion) ??
+        travelRegions[0];
+  
+      map.flyTo(region.center, region.zoom, {
         duration: 1.1,
       });
+  
       return;
     }
 
@@ -101,7 +116,7 @@ function MapController({
     }, 1150);
 
     return () => window.clearTimeout(timer);
-  }, [map, selectedPlace]);
+  }, [map, selectedPlace, activeRegion]);
 
   return null;
 }
@@ -202,6 +217,7 @@ export default function Travel() {
 
             <MapController
               selectedPlace={selectedPlace}
+              activeRegion={activeRegion}
               onZoomChange={setMapZoom}
             />
 
@@ -277,7 +293,10 @@ export default function Travel() {
                   return (
                     <button
                       key={region.key}
-                      onClick={() => setActiveRegion(region.key)}
+                      onClick={() => {
+                        setActiveRegion(region.key);
+                        setSelectedPlace(null);
+                      }}
                       className={`rounded-full border px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] transition md:text-xs ${
                         active
                           ? "border-stone-900 bg-stone-900 text-white"
