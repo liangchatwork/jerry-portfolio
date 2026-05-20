@@ -558,6 +558,7 @@ const dramaItems: DramaItem[] = [
     type: "Movie",
     category: "movies",
     wikiTitle: "The Secret Life of Walter Mitty",
+    imageUrl: `${import.meta.env.BASE_URL}drama/waltermitty.jpg`,
     note: "有時候真正的冒險不是幻想，而是踏出去的那一步。風景、音樂跟人生感都很舒服。",
     rotate: "rotate-2",
     offset: "md:translate-y-7",
