@@ -63,7 +63,7 @@ const artists: MusicArtist[] = [
     name: "結束バンド",
     displayName: "Kessoku Band",
     spotifyUrl: "https://open.spotify.com/artist/2nvl0N9GwyX69RRBMEZ4OD",
-    note: "193姐姐Vocal太讚，更不用說Yoppi，根本快要遍吉他英雄了吧?",
+    note: "193姐姐Vocal太讚，更不用說Yoppi，根本快要變吉他英雄了吧?",
     rotate: "rotate-1",
     offset: "md:translate-y-10",
     delay: "600ms",
