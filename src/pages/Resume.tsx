@@ -310,7 +310,7 @@ export default function Resume() {
             </ul>
 
             {/* Portrait */}
-            <div className="animate-image-reveal hidden lg:-mt-24 lg:block">
+            <div className="animate-image-reveal mx-auto mt-8 w-full max-w-[280px] lg:-mt-24 lg:max-w-none">
               <div className="aspect-[3/4] overflow-hidden rounded-[2rem] border border-white/65 bg-white/45 shadow-2xl backdrop-blur-xl">
                 <img
                   src={`${import.meta.env.BASE_URL}resume-profile.jpg`}
