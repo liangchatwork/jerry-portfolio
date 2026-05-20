@@ -11,6 +11,52 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 
+type TravelRegion = "taiwan" | "asia" | "westernEurope";
+
+const travelRegions: {
+  key: TravelRegion;
+  label: string;
+  zhLabel: string;
+}[] = [
+  {
+    key: "taiwan",
+    label: "Taiwan",
+    zhLabel: "台灣",
+  },
+  {
+    key: "asia",
+    label: "Asia",
+    zhLabel: "亞洲",
+  },
+  {
+    key: "westernEurope",
+    label: "Western Europe",
+    zhLabel: "西歐",
+  },
+];
+
+function getTravelRegion(place: TravelPlace): TravelRegion {
+  const country = place.country.toLowerCase();
+
+  if (country.includes("taiwan")) {
+    return "taiwan";
+  }
+
+  if (
+    country.includes("japan") ||
+    country.includes("korea") ||
+    country.includes("china") ||
+    country.includes("thailand") ||
+    country.includes("vietnam") ||
+    country.includes("singapore") ||
+    country.includes("malaysia")
+  ) {
+    return "asia";
+  }
+
+  return "westernEurope";
+}
+
 function MapController({
   selectedPlace,
   onZoomChange,
@@ -64,6 +110,20 @@ export default function Travel() {
   const base = import.meta.env.BASE_URL;
   const [selectedPlace, setSelectedPlace] = useState<TravelPlace | null>(null);
   const [mapZoom, setMapZoom] = useState(2);
+  const [activeRegion, setActiveRegion] = useState<TravelRegion>("taiwan");
+
+  const groupedTravelPlaces = useMemo(() => {
+    return travelRegions.map((region) => ({
+      ...region,
+      places: travelPlaces.filter(
+        (place) => getTravelRegion(place) === region.key
+      ),
+    }));
+  }, []);
+
+  const activeRegionData =
+    groupedTravelPlaces.find((region) => region.key === activeRegion) ??
+    groupedTravelPlaces[0];
 
   const pinIcon = useMemo(() => {
     const outerSize = mapZoom >= 8 ? 22 : 34;
@@ -96,12 +156,12 @@ export default function Travel() {
     });
   }, [mapZoom]);
 
-  const showFooter = !selectedPlace && mapZoom <= 2.2;
+  const showFooter = !selectedPlace && mapZoom <= 4.2;
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#dcecf3] text-stone-900">
       <section className="relative min-h-screen overflow-hidden px-5 py-6 md:px-10 md:py-8">
-        <Header map/>
+        <Header map />
 
         {/* Fullscreen Map */}
         <div className="absolute inset-x-0 bottom-0 top-36 z-0 bg-[#dcecf3] md:top-24">
@@ -156,6 +216,94 @@ export default function Travel() {
           </MapContainer>
         </div>
 
+        {/* Floating Travel List */}
+        {!selectedPlace && (
+          <aside className="absolute bottom-5 left-4 right-4 z-10 rounded-[1.5rem] border border-white/70 bg-white/80 p-4 shadow-2xl backdrop-blur-xl md:bottom-auto md:left-10 md:right-auto md:top-32 md:w-[380px] md:rounded-[2rem] md:p-5">
+            <div className="flex items-end justify-between gap-4">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.35em] text-stone-500 md:text-[11px]">
+                  Travel Points
+                </p>
+
+                <h2 className="mt-2 text-xl font-black tracking-[-0.05em] text-stone-900 md:text-2xl">
+                  目前紀錄
+                </h2>
+              </div>
+
+              <p className="text-[10px] uppercase tracking-[0.25em] text-stone-500 md:text-xs">
+                {travelPlaces.length} pins
+              </p>
+            </div>
+
+            {/* Region Tabs */}
+            <div className="scrollbar-hide mt-5 overflow-x-auto">
+              <div className="flex min-w-max gap-2">
+                {groupedTravelPlaces.map((region) => {
+                  const active = activeRegion === region.key;
+
+                  return (
+                    <button
+                      key={region.key}
+                      onClick={() => setActiveRegion(region.key)}
+                      className={`rounded-full border px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] transition md:text-xs ${
+                        active
+                          ? "border-stone-900 bg-stone-900 text-white"
+                          : "border-stone-300 bg-white/60 text-stone-600 hover:border-stone-600 hover:bg-white"
+                      }`}
+                    >
+                      {region.zhLabel}
+                      <span className="ml-2 opacity-60">
+                        {region.places.length}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Active Region List */}
+            <div className="scrollbar-hide mt-5 max-h-[34vh] space-y-2 overflow-y-auto pr-1 md:max-h-[48vh]">
+              {activeRegionData.places.length > 0 ? (
+                activeRegionData.places.map((place) => (
+                  <button
+                    key={place.id}
+                    onClick={() => setSelectedPlace(place)}
+                    className="group w-full rounded-2xl border border-stone-200/70 bg-white/60 p-3 text-left transition hover:-translate-y-0.5 hover:border-stone-400 hover:bg-white/90 hover:shadow-lg md:p-4"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <p className="text-[10px] uppercase tracking-[0.28em] text-stone-500">
+                          {place.country}
+                        </p>
+
+                        <h3 className="mt-2 text-[14px] font-bold leading-6 tracking-[-0.02em] text-stone-900 md:text-[15px]">
+                          {place.zhName}
+                        </h3>
+
+                        <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-stone-500 md:text-xs">
+                          {place.name}
+                        </p>
+
+                        {place.title && (
+                          <p className="mt-3 line-clamp-2 text-sm leading-6 text-stone-600">
+                            {place.title}
+                          </p>
+                        )}
+                      </div>
+
+                      <span className="mt-1 h-3 w-3 shrink-0 rounded-full bg-red-500 shadow-[0_0_0_8px_rgba(239,68,68,0.16)] transition group-hover:shadow-[0_0_0_10px_rgba(239,68,68,0.22)]" />
+                    </div>
+                  </button>
+                ))
+              ) : (
+                <div className="rounded-2xl border border-stone-200/70 bg-white/60 p-5 text-sm leading-7 text-stone-500">
+                  這個區域目前還沒有旅行紀錄。
+                </div>
+              )}
+            </div>
+          </aside>
+        )}
+
         {/* Info Panel */}
         {selectedPlace && (
           <aside className="absolute inset-x-4 bottom-4 top-40 z-20 overflow-y-auto rounded-[1.5rem] border border-white/70 bg-white/90 p-5 shadow-2xl backdrop-blur-xl md:inset-x-auto md:bottom-auto md:right-10 md:top-28 md:h-[calc(100vh-9rem)] md:w-[65vw] md:rounded-[2rem] md:p-8">
@@ -169,11 +317,11 @@ export default function Travel() {
 
                   <h1 className="mt-4 text-3xl font-black leading-tight tracking-[-0.04em] text-stone-900 md:mt-5 md:text-5xl">
                     {selectedPlace.title ?? selectedPlace.zhName}
-                    </h1>
+                  </h1>
 
-                    <p className="mt-4 text-sm uppercase tracking-[0.3em] text-stone-500">
+                  <p className="mt-4 text-sm uppercase tracking-[0.3em] text-stone-500">
                     {selectedPlace.name}
-                    </p>
+                  </p>
                 </div>
 
                 <button

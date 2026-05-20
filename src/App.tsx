@@ -4,6 +4,7 @@ import About from "./pages/About";
 import UnderConstruction from "./pages/UnderConstruction";
 import { SlideshowProvider } from "./components/SlideshowContext";
 import Travel from "./pages/Travel";
+import Resume from "./pages/Resume";
 
 export default function App() {
   return (
@@ -12,10 +13,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
 
-        <Route
-          path="/resume"
-          element={<UnderConstruction title="RESUME" subtitle="履歷" />}
-        />
+        <Route path="/resume" element={<Resume />} />
 
         <Route
           path="/music"
