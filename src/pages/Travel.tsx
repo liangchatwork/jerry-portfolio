@@ -111,6 +111,7 @@ export default function Travel() {
   const [selectedPlace, setSelectedPlace] = useState<TravelPlace | null>(null);
   const [mapZoom, setMapZoom] = useState(2);
   const [activeRegion, setActiveRegion] = useState<TravelRegion>("taiwan");
+  const [isMobileListOpen, setIsMobileListOpen] = useState(false);
 
   const groupedTravelPlaces = useMemo(() => {
     return travelRegions.map((region) => ({
@@ -157,6 +158,11 @@ export default function Travel() {
   }, [mapZoom]);
 
   const showFooter = !selectedPlace && mapZoom <= 4.2;
+
+  function openPlace(place: TravelPlace) {
+    setSelectedPlace(place);
+    setIsMobileListOpen(false);
+  }
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#dcecf3] text-stone-900">
@@ -216,9 +222,27 @@ export default function Travel() {
           </MapContainer>
         </div>
 
+        {/* Mobile Floating Toggle */}
+        {!selectedPlace && (
+          <button
+            onClick={() => setIsMobileListOpen((prev) => !prev)}
+            className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-3 rounded-full border border-white/80 bg-white/90 px-5 py-3 text-xs font-bold uppercase tracking-[0.22em] text-stone-800 shadow-2xl backdrop-blur-xl md:hidden"
+          >
+            <span className="h-2.5 w-2.5 rounded-full bg-red-500 shadow-[0_0_0_7px_rgba(239,68,68,0.16)]" />
+            Travel Points
+            <span className="text-stone-500">{travelPlaces.length}</span>
+          </button>
+        )}
+
         {/* Floating Travel List */}
         {!selectedPlace && (
-          <aside className="absolute bottom-5 left-4 right-4 z-10 rounded-[1.5rem] border border-white/70 bg-white/80 p-4 shadow-2xl backdrop-blur-xl md:bottom-auto md:left-10 md:right-auto md:top-32 md:w-[380px] md:rounded-[2rem] md:p-5">
+          <aside
+            className={`absolute left-4 right-4 z-10 rounded-[1.5rem] border border-white/70 bg-white/85 p-4 shadow-2xl backdrop-blur-xl transition-all duration-300 md:left-10 md:right-auto md:top-32 md:w-[380px] md:rounded-[2rem] md:p-5 ${
+              isMobileListOpen
+                ? "bottom-20 translate-y-0 opacity-100"
+                : "bottom-20 translate-y-8 pointer-events-none opacity-0 md:pointer-events-auto md:translate-y-0 md:opacity-100"
+            }`}
+          >
             <div className="flex items-end justify-between gap-4">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.35em] text-stone-500 md:text-[11px]">
@@ -230,9 +254,18 @@ export default function Travel() {
                 </h2>
               </div>
 
-              <p className="text-[10px] uppercase tracking-[0.25em] text-stone-500 md:text-xs">
-                {travelPlaces.length} pins
-              </p>
+              <div className="flex items-center gap-4">
+                <p className="text-[10px] uppercase tracking-[0.25em] text-stone-500 md:text-xs">
+                  {travelPlaces.length} pins
+                </p>
+
+                <button
+                  onClick={() => setIsMobileListOpen(false)}
+                  className="rounded-full border border-stone-300 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-stone-600 md:hidden"
+                >
+                  Close
+                </button>
+              </div>
             </div>
 
             {/* Region Tabs */}
@@ -262,12 +295,12 @@ export default function Travel() {
             </div>
 
             {/* Active Region List */}
-            <div className="scrollbar-hide mt-5 max-h-[34vh] space-y-2 overflow-y-auto pr-1 md:max-h-[48vh]">
+            <div className="scrollbar-hide mt-5 max-h-[36vh] space-y-2 overflow-y-auto pr-1 md:max-h-[48vh]">
               {activeRegionData.places.length > 0 ? (
                 activeRegionData.places.map((place) => (
                   <button
                     key={place.id}
-                    onClick={() => setSelectedPlace(place)}
+                    onClick={() => openPlace(place)}
                     className="group w-full rounded-2xl border border-stone-200/70 bg-white/60 p-3 text-left transition hover:-translate-y-0.5 hover:border-stone-400 hover:bg-white/90 hover:shadow-lg md:p-4"
                   >
                     <div className="flex items-start justify-between gap-4">
