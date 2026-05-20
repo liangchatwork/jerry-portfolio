@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import PageBackground from "../components/PageBackground";
 
 type DramaCategory = "classicAnime" | "recentAnime" | "drama" | "movies";
+type DisplayPart = "anime" | "drama" | "movies";
 
 type DramaItem = {
   title: string;
@@ -139,7 +140,7 @@ const dramaItems: DramaItem[] = [
     offset: "md:translate-y-4",
     delay: "720ms",
   },
-  
+
   {
     title: "咒術迴戰",
     originalTitle: "Jujutsu Kaisen",
@@ -476,7 +477,7 @@ const dramaItems: DramaItem[] = [
     delay: "1120ms",
   },
   {
-    title: "哈利波特：死神的聖物2",
+    title: "哈利波特：死神聖物2",
     originalTitle: "Harry Potter and the Deathly Hallows – Part 2",
     type: "Movie",
     category: "movies",
@@ -698,14 +699,22 @@ const dramaItems: DramaItem[] = [
   },
 ];
 
+const displayTabs: { key: DisplayPart; label: string; title: string }[] = [
+  { key: "anime", label: "Anime", title: "動畫" },
+  { key: "drama", label: "Drama", title: "戲劇" },
+  { key: "movies", label: "Movies", title: "電影" },
+];
+
 const categorySections: {
   key: DramaCategory;
+  part: DisplayPart;
   label: string;
   title: string;
   description: string;
 }[] = [
   {
     key: "classicAnime",
+    part: "anime",
     label: "Classic Anime",
     title: "爺的童年與青春們...",
     description:
@@ -713,6 +722,7 @@ const categorySections: {
   },
   {
     key: "recentAnime",
+    part: "anime",
     label: "Recent Favorites",
     title: "近年喜歡的動畫",
     description:
@@ -720,12 +730,14 @@ const categorySections: {
   },
   {
     key: "drama",
+    part: "drama",
     label: "Drama",
     title: "喜歡的劇",
     description: "日劇、韓劇、美劇都有一點，證明我不是只看動漫...XD。",
   },
   {
     key: "movies",
+    part: "movies",
     label: "Movies",
     title: "喜歡的電影",
     description:
@@ -827,6 +839,7 @@ function DramaCard({
 }
 
 export default function Drama() {
+  const [activePart, setActivePart] = useState<DisplayPart>("anime");
   const [imageMap, setImageMap] = useState<Record<string, string>>({});
 
   const wikiTitles = useMemo(() => {
@@ -902,44 +915,64 @@ export default function Drama() {
               最近與從前喜歡的作品
             </h1>
 
-            
+            <div className="animate-fade-up delay-200 mt-8 flex w-full max-w-xl gap-3 overflow-x-auto pb-2">
+              {displayTabs.map((tab) => {
+                const active = activePart === tab.key;
+
+                return (
+                  <button
+                    key={tab.key}
+                    onClick={() => setActivePart(tab.key)}
+                    className={`shrink-0 rounded-full border px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.28em] transition-all duration-300 ${
+                      active
+                        ? "border-stone-900 bg-stone-900 text-white shadow-xl"
+                        : "border-white/70 bg-white/55 text-stone-600 backdrop-blur-xl hover:bg-white/80 hover:text-stone-900"
+                    }`}
+                  >
+                    {tab.title}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          <div className="mt-16 space-y-24 md:mt-20">
-            {categorySections.map((section) => {
-              const sectionItems = dramaItems.filter(
-                (item) => item.category === section.key
-              );
+          <div className="mt-14 space-y-24 md:mt-20">
+            {categorySections
+              .filter((section) => section.part === activePart)
+              .map((section) => {
+                const sectionItems = dramaItems.filter(
+                  (item) => item.category === section.key
+                );
 
-              return (
-                <section key={section.key}>
-                  <div className="mb-10 max-w-2xl">
-                    <p className="text-xs uppercase tracking-[0.4em] text-stone-500">
-                      {section.label}
-                    </p>
+                return (
+                  <section key={section.key}>
+                    <div className="mb-10 max-w-2xl">
+                      <p className="text-xs uppercase tracking-[0.4em] text-stone-500">
+                        {section.label}
+                      </p>
 
-                    <h2 className="mt-4 text-3xl font-black tracking-[-0.06em] text-stone-900 md:text-5xl">
-                      {section.title}
-                    </h2>
+                      <h2 className="mt-4 text-3xl font-black tracking-[-0.06em] text-stone-900 md:text-5xl">
+                        {section.title}
+                      </h2>
 
-                    <p className="mt-5 text-sm leading-7 tracking-wide text-stone-600 md:text-base md:leading-8">
-                      {section.description}
-                    </p>
-                  </div>
+                      <p className="mt-5 text-sm leading-7 tracking-wide text-stone-600 md:text-base md:leading-8">
+                        {section.description}
+                      </p>
+                    </div>
 
-                  <div className="grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2 md:grid-cols-4 md:gap-x-7 md:gap-y-16 lg:grid-cols-5">
-                    {sectionItems.map((item, index) => (
-                      <DramaCard
-                        key={`${item.category}-${item.title}`}
-                        item={item}
-                        index={index}
-                        imageUrl={getImageUrl(item, imageMap)}
-                      />
-                    ))}
-                  </div>
-                </section>
-              );
-            })}
+                    <div className="grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2 md:grid-cols-4 md:gap-x-7 md:gap-y-16 lg:grid-cols-5">
+                      {sectionItems.map((item, index) => (
+                        <DramaCard
+                          key={`${item.category}-${item.title}`}
+                          item={item}
+                          index={index}
+                          imageUrl={getImageUrl(item, imageMap)}
+                        />
+                      ))}
+                    </div>
+                  </section>
+                );
+              })}
           </div>
         </section>
 
