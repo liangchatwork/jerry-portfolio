@@ -5,6 +5,8 @@ import UnderConstruction from "./pages/UnderConstruction";
 import { SlideshowProvider } from "./components/SlideshowContext";
 import Travel from "./pages/Travel";
 import Resume from "./pages/Resume";
+import Music from "./pages/Music";
+import Drama from "./pages/Drama";
 
 export default function App() {
   return (
@@ -15,15 +17,9 @@ export default function App() {
 
         <Route path="/resume" element={<Resume />} />
 
-        <Route
-          path="/music"
-          element={<UnderConstruction title="MUSIC" subtitle="音樂" />}
-        />
+        <Route path="/music" element={<Music />} />
 
-        <Route
-          path="/drama"
-          element={<UnderConstruction title="DRAMA" subtitle="追劇" />}
-        />
+        <Route path="/drama" element={<Drama />} />
 
         <Route path="/travel" element={<Travel />} />
 
