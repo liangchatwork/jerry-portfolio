@@ -598,7 +598,7 @@ const dramaItems: DramaItem[] = [
     delay: "1840ms",
   },
   {
-    title: "遇見你之前",
+    title: "我就要你好好的",
     originalTitle: "Me Before You",
     type: "Movie",
     category: "movies",
