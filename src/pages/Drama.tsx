@@ -908,7 +908,7 @@ export default function Drama() {
         <section className="mx-auto mt-16 max-w-7xl md:mt-24">
           <div className="max-w-3xl">
             <p className="animate-fade-up text-xs uppercase tracking-[0.45em] text-stone-500">
-              Drama / Anime / Movies
+              Drama / 追劇
             </p>
 
             <h1 className="animate-fade-up delay-100 mt-6 text-5xl font-black leading-none tracking-[-0.08em] text-stone-900 md:text-7xl">
