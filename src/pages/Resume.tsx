@@ -230,7 +230,6 @@ function skillBadge(skill: { name: string; logo: string; color: string }) {
 export default function Resume() {
   const [activeSection, setActiveSection] =
     useState<ResumeSection>("education");
-
   const [isFading, setIsFading] = useState(false);
 
   function handleSectionChange(section: ResumeSection) {
@@ -248,28 +247,28 @@ export default function Resume() {
     <main className="relative min-h-screen bg-transparent text-stone-900">
       <PageBackground />
 
-      {/* Readability Overlay */}
-
       <section className="relative z-10 px-4 py-4 sm:px-6 md:px-10 md:py-8">
         <Header />
 
-        {/* Page Title */}
-        <section className="mx-auto max-w-7xl pt-12 pb-10 md:pt-24 md:pb-12">
-          <p className="animate-fade-up text-[11px] uppercase tracking-[0.42em] text-stone-600 md:text-xs md:tracking-[0.45em]">
-            RESUME / 履歷
-          </p>
+      {/* Page Title */}
+      <section className="mx-auto max-w-7xl pt-12 pb-10 md:pt-24 md:pb-12">
+        <p className="animate-fade-up text-[11px] uppercase tracking-[0.42em] text-stone-600 md:text-xs md:tracking-[0.45em]">
+          RESUME / 履歷
+        </p>
 
-          <h1 className="animate-fade-up delay-100 mt-6 text-4xl font-black uppercase leading-[0.9] tracking-[-0.06em] text-stone-950 drop-shadow-sm sm:text-5xl md:text-7xl">
-            Chen-Hsun
-            <br />
-            Jerry
-            <br />
-            Liang
-          </h1>
+        <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,680px)_520px] lg:items-stretch lg:gap-14 xl:grid-cols-[minmax(0,700px)_560px]">
+          {/* Left: Name + Brief Intro */}
+          <div className="order-2 flex flex-col lg:order-1">
+            <h1 className="animate-fade-up delay-100 text-4xl font-black uppercase leading-[0.9] tracking-[-0.06em] text-stone-950 drop-shadow-sm sm:text-5xl md:text-7xl">
+              Chen-Hsun
+              <br />
+              Jerry
+              <br />
+              Liang
+            </h1>
 
-          <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_360px] lg:items-start lg:gap-10">
             {/* Brief Intro */}
-            <ul className="animate-fade-up delay-200 max-w-2xl space-y-5 rounded-[1.5rem] border border-white/65 bg-white/55 p-5 text-[15px] leading-7 tracking-wide text-stone-800 shadow-xl backdrop-blur-xl md:space-y-6 md:p-6 md:text-[17px] md:leading-8">
+            <ul className="animate-fade-up delay-200 mt-8 max-w-2xl space-y-5 rounded-[1.5rem] border border-white/65 bg-white/55 p-5 text-[15px] leading-7 tracking-wide text-stone-800 shadow-xl backdrop-blur-xl md:space-y-6 md:p-6 md:text-[17px] md:leading-8 lg:mt-auto">
               <li className="flex gap-4">
                 <span className="mt-3 h-2 w-2 shrink-0 rounded-full bg-stone-900" />
                 <div>
@@ -278,10 +277,9 @@ export default function Resume() {
                     Engineer，預計 2026 年 7 月畢業。
                   </p>
                   <p className="mt-2 text-sm italic leading-6 text-stone-600 md:text-[15px]">
-                    Master's student in Computer Science and Information
-                    Engineering at National Cheng Kung University, serving as
-                    R&amp;D and Software Engineer at the ISMP Lab. Expected to
-                    graduate in July 2026.
+                    Master's student in Computer Science and Information Engineering
+                    at National Cheng Kung University, serving as R&amp;D and Software
+                    Engineer at the ISMP Lab. Expected to graduate in July 2026.
                   </p>
                 </div>
               </li>
@@ -302,27 +300,28 @@ export default function Resume() {
                 <div>
                   <p>曾赴德國慕尼黑工業大學 TUM Informatics 交換。</p>
                   <p className="mt-2 text-sm italic leading-6 text-stone-600 md:text-[15px]">
-                    Exchange experience in Informatics at the Technical
-                    University of Munich (TUM) in Germany.
+                    Exchange experience in Informatics at the Technical University of
+                    Munich (TUM) in Germany.
                   </p>
                 </div>
               </li>
             </ul>
+          </div>
 
-            {/* Portrait */}
-            <div className="animate-image-reveal mx-auto mt-8 w-full max-w-[280px] lg:-mt-24 lg:max-w-none">
-              <div className="aspect-[3/4] overflow-hidden rounded-[2rem] border border-white/65 bg-white/45 shadow-2xl backdrop-blur-xl">
-                <img
-                  src={`${import.meta.env.BASE_URL}resume-profile.jpg`}
-                  alt="Chen-Hsun Jerry Liang"
-                  className="h-full w-full object-cover object-center"
-                />
-              </div>
+          {/* Portrait */}
+          <div className="animate-image-reveal order-1 mx-auto w-full max-w-[260px] sm:max-w-[300px] lg:order-2 lg:mx-0 lg:h-full lg:max-w-none">
+            <div className="aspect-[3/4] overflow-hidden rounded-[2rem] border border-white/65 bg-white/45 shadow-2xl backdrop-blur-xl lg:aspect-auto lg:h-full">
+              <img
+                src={`${import.meta.env.BASE_URL}resume-profile.jpg`}
+                alt="Chen-Hsun Jerry Liang"
+                className="h-full w-full object-cover object-center"
+              />
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Resume Content */}
+      {/* Resume Content */}
         <div className="mx-auto max-w-7xl pb-20 md:pb-32">
           <div className="rounded-[1.5rem] border border-white/65 bg-white/55 p-4 shadow-xl backdrop-blur-xl md:rounded-[2rem] md:p-6">
             {/* Hidden Scroll Menu */}
