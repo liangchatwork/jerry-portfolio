@@ -879,10 +879,7 @@ export default function Drama() {
               最近與從前喜歡的作品
             </h1>
 
-            <p className="animate-fade-up delay-200 mt-7 max-w-2xl text-base leading-8 tracking-wide text-stone-600 md:text-lg">
-              這裡整理一些動畫、劇集與電影。圖片會優先使用手動指定的來源，
-              沒有指定時會自動從 Wikipedia / Wikimedia 抓縮圖，抓不到就保留文字卡。
-            </p>
+            
           </div>
 
           <div className="mt-16 space-y-24 md:mt-20">
