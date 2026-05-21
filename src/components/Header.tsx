@@ -19,8 +19,6 @@ function SocialIcon({
   light: boolean;
   size?: number;
 }) {
-  const iconClass = light ? "invert" : "";
-
   if (social.icon === "linkedin") {
     return (
       <svg
@@ -39,7 +37,7 @@ function SocialIcon({
     <img
       src={social.src}
       alt={social.label}
-      className={`${iconClass}`}
+      className={light ? "invert" : ""}
       style={{ width: size, height: size }}
     />
   );
@@ -192,85 +190,91 @@ export default function Header({
           type="button"
           aria-label="Close menu background"
           onClick={() => setMenuOpen(false)}
-          className="absolute inset-0 bg-stone-950/55 backdrop-blur-md"
+          className="fixed inset-0 bg-stone-950/55 backdrop-blur-md"
         />
 
-        <div
-          className={`absolute left-4 right-4 top-5 overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 p-5 text-stone-900 shadow-2xl backdrop-blur-2xl transition duration-500 ${
-            menuOpen
-              ? "translate-y-0 scale-100 opacity-100"
-              : "-translate-y-5 scale-95 opacity-0"
-          }`}
-        >
-          <div className="flex items-start justify-between gap-5">
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.36em] text-stone-500">
-                A-HSUN JERRY
+        <div className="relative z-10 h-full overflow-y-auto px-4 py-5">
+          <div
+            className={`mx-auto w-full max-w-md overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 p-5 text-stone-900 shadow-2xl backdrop-blur-2xl transition duration-500 ${
+              menuOpen
+                ? "translate-y-0 scale-100 opacity-100"
+                : "-translate-y-5 scale-95 opacity-0"
+            }`}
+          >
+            <div className="flex items-start justify-between gap-5">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.36em] text-stone-500">
+                  A-HSUN JERRY
+                </p>
+
+                <h2 className="mt-3 text-4xl font-black uppercase leading-none tracking-[-0.08em] text-stone-950">
+                  Menu
+                </h2>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setMenuOpen(false)}
+                className="rounded-full border border-stone-300/70 bg-white/60 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-stone-700 shadow-md backdrop-blur-xl"
+                aria-label="Close menu"
+              >
+                Close
+              </button>
+            </div>
+
+            <nav className="mt-7 grid grid-cols-2 gap-3">
+              {navItems.map(([en, zh, href], index) => (
+                <Link
+                  key={en}
+                  to={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-[1.35rem] border border-white/70 bg-white/55 p-4 shadow-lg backdrop-blur-xl transition active:scale-[0.98]"
+                >
+                  <p className="text-[10px] uppercase tracking-[0.28em] text-stone-500">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+
+                  <p className="mt-3 text-[16px] font-black uppercase tracking-[0.12em] text-stone-950">
+                    {en}
+                  </p>
+
+                  <p className="mt-2 text-sm tracking-[0.24em] text-stone-600">
+                    {zh}
+                  </p>
+                </Link>
+              ))}
+            </nav>
+
+            <div className="mt-6 border-t border-stone-300/70 pt-5">
+              <p className="text-[10px] uppercase tracking-[0.34em] text-stone-500">
+                Social
               </p>
 
-              <h2 className="mt-3 text-4xl font-black uppercase leading-none tracking-[-0.08em] text-stone-950">
-                Menu
-              </h2>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setMenuOpen(false)}
-              className="rounded-full border border-stone-300/70 bg-white/60 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-stone-700 shadow-md backdrop-blur-xl"
-              aria-label="Close menu"
-            >
-              Close
-            </button>
-          </div>
-
-          <nav className="mt-7 grid grid-cols-2 gap-3">
-            {navItems.map(([en, zh, href], index) => (
-              <Link
-                key={en}
-                to={href}
-                onClick={() => setMenuOpen(false)}
-                className="rounded-[1.35rem] border border-white/70 bg-white/55 p-4 shadow-lg backdrop-blur-xl transition active:scale-[0.98]"
-              >
-                <p className="text-[10px] uppercase tracking-[0.28em] text-stone-500">
-                  {String(index + 1).padStart(2, "0")}
-                </p>
-
-                <p className="mt-3 text-[16px] font-black uppercase tracking-[0.12em] text-stone-950">
-                  {en}
-                </p>
-
-                <p className="mt-2 text-sm tracking-[0.24em] text-stone-600">
-                  {zh}
-                </p>
-              </Link>
-            ))}
-          </nav>
-
-          <div className="mt-6 border-t border-stone-300/70 pt-5">
-            <p className="text-[10px] uppercase tracking-[0.34em] text-stone-500">
-              Social
-            </p>
-
-            <div className="mt-4 flex flex-wrap gap-3">
-              {socials.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target={
-                    social.href.startsWith("mailto:") ? undefined : "_blank"
-                  }
-                  rel={
-                    social.href.startsWith("mailto:") ? undefined : "noreferrer"
-                  }
-                  className="flex items-center gap-2 rounded-full border border-stone-300/70 bg-white/55 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-800 shadow-md backdrop-blur-xl"
-                  aria-label={social.label}
-                >
-                  <SocialIcon social={social} light={false} size={14} />
-                  {social.label}
-                </a>
-              ))}
+              <div className="mt-4 flex flex-wrap gap-3">
+                {socials.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target={
+                      social.href.startsWith("mailto:") ? undefined : "_blank"
+                    }
+                    rel={
+                      social.href.startsWith("mailto:")
+                        ? undefined
+                        : "noreferrer"
+                    }
+                    className="flex items-center gap-2 rounded-full border border-stone-300/70 bg-white/55 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-800 shadow-md backdrop-blur-xl"
+                    aria-label={social.label}
+                  >
+                    <SocialIcon social={social} light={false} size={14} />
+                    {social.label}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
+
+          <div className="h-8" />
         </div>
       </div>
     </>
