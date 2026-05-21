@@ -424,7 +424,7 @@ export default function Travel() {
         <Header map />
 
         {/* Fullscreen Map */}
-        <div className="absolute inset-x-0 bottom-0 top-36 z-0 bg-[#dcecf3] md:top-24">
+        <div className="absolute inset-x-0 bottom-0 top-22 z-0 bg-[#dcecf3] md:top-24">
           <MapContainer
             center={[23.7, 121]}
             zoom={4}
