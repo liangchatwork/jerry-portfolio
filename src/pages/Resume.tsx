@@ -265,14 +265,12 @@ export default function Resume() {
       <section className="relative z-10 px-4 py-4 sm:px-6 md:px-10 md:py-8">
         <Header />
 
-        {/* Page Title */}
         <section className="mx-auto max-w-7xl pt-12 pb-10 md:pt-24 md:pb-12">
           <p className="animate-fade-up text-[11px] uppercase tracking-[0.42em] text-stone-600 md:text-xs md:tracking-[0.45em]">
             RESUME / 履歷
           </p>
 
           <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,680px)_520px] lg:items-stretch lg:gap-14 xl:grid-cols-[minmax(0,700px)_560px]">
-            {/* Left: Name + Brief Intro */}
             <div className="order-2 flex flex-col lg:order-1">
               <h1 className="animate-fade-up delay-100 text-4xl font-black uppercase leading-[0.9] tracking-[-0.06em] text-stone-950 drop-shadow-sm sm:text-5xl md:text-7xl">
                 Chen-Hsun
@@ -282,7 +280,6 @@ export default function Resume() {
                 Liang
               </h1>
 
-              {/* Brief Intro */}
               <div className="relative mt-8 max-w-2xl lg:mt-auto">
                 <ul
                   className={`animate-fade-up delay-200 space-y-5 rounded-[1.5rem] border border-white/65 bg-white/55 p-5 text-[15px] leading-7 tracking-wide text-stone-800 shadow-xl backdrop-blur-xl transition-all duration-1000 ease-in-out md:space-y-6 md:p-6 md:text-[17px] md:leading-8 ${
@@ -348,7 +345,6 @@ export default function Resume() {
               </div>
             </div>
 
-            {/* Portrait */}
             <div className="animate-image-reveal order-1 mx-auto w-full max-w-[280px] sm:max-w-[320px] lg:order-2 lg:mx-0 lg:h-full lg:max-w-none">
               <div className="aspect-[3/4] overflow-hidden rounded-[2rem] border border-white/65 bg-white/45 shadow-2xl backdrop-blur-xl lg:aspect-auto lg:h-full">
                 <img
@@ -361,7 +357,6 @@ export default function Resume() {
           </div>
         </section>
 
-        {/* Resume Content */}
         <div className="relative mx-auto max-w-7xl pb-20 md:pb-32">
           <div
             className={`rounded-[1.5rem] border border-white/65 bg-white/55 p-4 shadow-xl backdrop-blur-xl transition-all duration-1000 ease-in-out md:rounded-[2rem] md:p-6 ${
@@ -370,7 +365,6 @@ export default function Resume() {
                 : "blur-0 opacity-100"
             }`}
           >
-            {/* Hidden Scroll Menu */}
             <div className="scrollbar-hide -mx-4 overflow-x-auto border-y border-stone-400/40 px-4 py-4 md:mx-0 md:px-0 md:py-5">
               <div className="mx-auto flex w-fit min-w-max justify-center gap-8 md:gap-16">
                 {sectionTabs.map((tab) => {
@@ -393,7 +387,6 @@ export default function Resume() {
               </div>
             </div>
 
-            {/* Expand Area */}
             <div
               className={`mt-8 transition-all duration-200 ease-out md:mt-10 ${
                 isFading
@@ -621,23 +614,17 @@ export default function Resume() {
 
           {RESUME_LOCKED && (
             <div
-            className={`absolute inset-x-0 top-0 z-20 flex min-h-[360px] items-start justify-center rounded-[1.5rem] bg-white/35 px-5 pt-20 text-center backdrop-blur-sm transition-all duration-1000 ease-in-out md:inset-0 md:items-center md:pt-0 md:rounded-[2rem] ${
+              className={`absolute inset-0 z-20 flex items-center justify-center rounded-[1.5rem] border border-white/60 bg-white/45 px-5 text-center shadow-xl backdrop-blur-md transition-all duration-1000 ease-in-out md:rounded-[2rem] ${
                 shouldBlurResume
                   ? "opacity-100"
                   : "pointer-events-none opacity-0"
               }`}
             >
-              <div className="max-w-xl rounded-[1.5rem] border border-white/70 bg-white/70 px-6 py-8 shadow-2xl backdrop-blur-xl md:px-10 md:py-10">
-                <p className="text-[11px] uppercase tracking-[0.35em] text-stone-500">
-                  Resume Temporarily Hidden
-                </p>
-
-                <p className="mt-5 text-sm font-semibold leading-8 tracking-[0.18em] text-stone-700 md:text-base">
-                  比我更猛的比比皆是，
-                  <br />
-                  所以我先不自曝其短了...
-                </p>
-              </div>
+              <p className="text-sm font-semibold leading-7 tracking-[0.18em] text-stone-800 md:text-base">
+                比我更猛的比比皆是，
+                <br />
+                所以我先不自曝其短了...
+              </p>
             </div>
           )}
         </div>

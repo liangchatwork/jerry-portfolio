@@ -8,36 +8,55 @@ type SlideshowContextType = {
 
 const SlideshowContext = createContext<SlideshowContextType | null>(null);
 
-export function SlideshowProvider({ children }: { children: React.ReactNode }) {
-  const base = import.meta.env.BASE_URL;
+function shuffleArray<T>(array: T[]) {
+  const nextArray = [...array];
 
-  const slides = Array.from(
-    { length: 30 },
-    (_, i) => `${base}profile-${i + 1}.jpg`
-  );
+  for (let i = nextArray.length - 1; i > 0; i -= 1) {
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+
+    [nextArray[i], nextArray[randomIndex]] = [
+      nextArray[randomIndex],
+      nextArray[i],
+    ];
+  }
+
+  return nextArray;
+}
+
+export function SlideshowProvider({ children }: { children: React.ReactNode }) {
+  const [slides] = useState(() => {
+    const base = import.meta.env.BASE_URL;
+
+    const orderedSlides = Array.from(
+      { length: 30 },
+      (_, i) => `${base}profile-${i + 1}.jpg`
+    );
+
+    return shuffleArray(orderedSlides);
+  });
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [previousSlide, setPreviousSlide] = useState<number | null>(null);
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const timer = window.setInterval(() => {
       setCurrentSlide((prev) => {
         setPreviousSlide(prev);
         return (prev + 1) % slides.length;
       });
     }, 10000);
 
-    return () => clearInterval(timer);
+    return () => window.clearInterval(timer);
   }, [slides.length]);
 
   useEffect(() => {
     if (previousSlide === null) return;
 
-    const cleanup = setTimeout(() => {
+    const cleanup = window.setTimeout(() => {
       setPreviousSlide(null);
     }, 1600);
 
-    return () => clearTimeout(cleanup);
+    return () => window.clearTimeout(cleanup);
   }, [previousSlide]);
 
   return (
