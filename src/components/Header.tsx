@@ -121,16 +121,31 @@ export default function Header({
   return (
     <>
       <header
-        className={`relative z-20 flex items-start justify-between gap-y-5 animate-nav-fade lg:grid lg:grid-cols-[180px_1fr_180px] lg:items-start ${
-          map ? "-mx-10 -mt-8 bg-[#dcecf3] px-10 py-8" : ""
+        className={`relative z-20 flex items-center justify-between gap-y-5 animate-nav-fade lg:grid lg:grid-cols-[180px_1fr_180px] lg:items-start ${
+          map
+            ? "-mx-4 -mt-4 bg-[#dcecf3] px-4 py-4 sm:-mx-6 sm:px-6 md:-mx-10 md:-mt-8 md:px-10 md:py-8"
+            : ""
         }`}
       >
         <Link
           to="/"
-          className={`shrink-0 text-xs uppercase tracking-[0.32em] transition ${textMain} ${hover}`}
+          className={`shrink-0 uppercase transition ${textMain} ${hover}`}
         >
-          <p>A-HSUN JERRY</p>
-          <p className={`mt-1 ${textSub}`}>PORTFOLIO / 2026</p>
+          <p
+            className={`text-[11px] tracking-[0.32em] sm:text-xs ${
+              map ? "md:text-xs" : ""
+            }`}
+          >
+            A-HSUN JERRY
+          </p>
+
+          <p
+            className={`mt-2 text-[11px] tracking-[0.32em] sm:text-xs ${textSub} ${
+              map ? "md:mt-1" : "md:mt-1"
+            }`}
+          >
+            PORTFOLIO / 2026
+          </p>
         </Link>
 
         <nav className="hidden justify-center gap-12 lg:flex">
@@ -143,6 +158,7 @@ export default function Header({
               <p className={`text-xs uppercase tracking-[0.35em] ${textMain}`}>
                 {en}
               </p>
+
               <p className={`mt-2 text-[11px] tracking-[0.25em] ${textSub}`}>
                 {zh}
               </p>
@@ -168,10 +184,10 @@ export default function Header({
         <button
           type="button"
           onClick={() => setMenuOpen(true)}
-          className={`shrink-0 rounded-full border px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.28em] shadow-lg backdrop-blur-xl transition lg:hidden ${
+          className={`shrink-0 rounded-full border px-5 py-2.5 text-[10px] font-semibold uppercase tracking-[0.3em] shadow-lg backdrop-blur-xl transition lg:hidden ${
             light
               ? "border-white/45 bg-black/20 text-white hover:bg-black/30"
-              : "border-stone-900/15 bg-white/50 text-stone-900 hover:bg-white/70"
+              : "border-stone-900/15 bg-white/60 text-stone-900 hover:bg-white/80"
           }`}
           aria-label="Open menu"
         >
