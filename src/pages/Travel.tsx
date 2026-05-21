@@ -424,7 +424,7 @@ export default function Travel() {
         <Header map />
 
         {/* Fullscreen Map */}
-        <div className="absolute inset-x-0 bottom-0 top-22 z-0 bg-[#dcecf3] md:top-24">
+        <div className="absolute inset-x-0 bottom-0 top-[88px] z-0 bg-[#dcecf3] md:top-24">
           <MapContainer
             center={[23.7, 121]}
             zoom={4}
@@ -479,10 +479,10 @@ export default function Travel() {
         </div>
 
         {/* Mobile Floating Toggle */}
-        {!selectedPlace && (
+        {!selectedPlace && !isMobileListOpen && (
           <button
-            onClick={() => setIsMobileListOpen((prev) => !prev)}
-            className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-3 rounded-full border border-white/80 bg-white/90 px-5 py-3 text-xs font-bold uppercase tracking-[0.22em] text-stone-800 shadow-2xl backdrop-blur-xl md:hidden"
+            onClick={() => setIsMobileListOpen(true)}
+            className="absolute left-1/2 top-[104px] z-20 flex -translate-x-1/2 items-center gap-3 rounded-full border border-white/80 bg-white/90 px-5 py-3 text-xs font-bold uppercase tracking-[0.22em] text-stone-800 shadow-2xl backdrop-blur-xl md:hidden"
           >
             <span className="h-2.5 w-2.5 rounded-full bg-red-500 shadow-[0_0_0_7px_rgba(239,68,68,0.16)]" />
             Travel Points
@@ -493,10 +493,10 @@ export default function Travel() {
         {/* Floating Travel List */}
         {!selectedPlace && (
           <aside
-            className={`absolute left-4 right-4 z-10 rounded-[1.5rem] border border-white/70 bg-white/85 p-4 shadow-2xl backdrop-blur-xl transition-all duration-300 md:left-10 md:right-auto md:top-32 md:w-[380px] md:rounded-[2rem] md:p-5 ${
+            className={`absolute left-4 right-4 top-[104px] z-30 rounded-[1.5rem] border border-white/70 bg-white/85 p-4 shadow-2xl backdrop-blur-xl transition-all duration-300 md:left-10 md:right-auto md:top-32 md:w-[380px] md:rounded-[2rem] md:p-5 ${
               isMobileListOpen
-                ? "bottom-20 translate-y-0 opacity-100"
-                : "pointer-events-none bottom-20 translate-y-8 opacity-0 md:pointer-events-auto md:translate-y-0 md:opacity-100"
+                ? "translate-y-0 opacity-100"
+                : "pointer-events-none -translate-y-4 opacity-0 md:pointer-events-auto md:translate-y-0 md:opacity-100"
             }`}
           >
             <div className="flex items-end justify-between gap-4">
