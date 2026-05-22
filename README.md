@@ -8,8 +8,7 @@ The website is designed to present my background, resume, projects, travel recor
 
 ## Live Demo
 
-Website:  
-https://liangchatwork.github.io/jerry-portfolio/
+![Demo](./public/demo.gif)
 
 ---
 
