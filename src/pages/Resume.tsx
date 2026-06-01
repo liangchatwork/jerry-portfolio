@@ -348,7 +348,7 @@ export default function Resume() {
             <div className="animate-image-reveal order-1 mx-auto w-full max-w-[280px] sm:max-w-[320px] lg:order-2 lg:mx-0 lg:h-full lg:max-w-none">
               <div className="aspect-[3/4] overflow-hidden rounded-[2rem] border border-white/65 bg-white/45 shadow-2xl backdrop-blur-xl lg:aspect-auto lg:h-full">
                 <img
-                  src={`${import.meta.env.BASE_URL}resume-profile.jpg`}
+                  src={`${import.meta.env.BASE_URL}resume-pf.jpg`}
                   alt="Chen-Hsun Jerry Liang"
                   className="h-full w-full object-cover object-center"
                 />
