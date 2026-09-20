@@ -317,6 +317,18 @@ const dramaItems: DramaItem[] = [
     delay: "360ms",
   },
 
+  
+  {
+    title: "蜘蛛人：嶄新之日",
+    originalTitle: "Spider-Man: Brand New Day",
+    type: "Movie / 2026",
+    category: "superheroMovies",
+    wikiTitle: "Spider-Man: Brand New Day",
+    note: "我個人最喜歡的MCU蜘蛛人電影，完全徹底的回到蜘蛛人這個角色該有的基調。事實證明好的劇本，即使沒有三蟲同框，也能賺的比三蟲更多。",
+    rotate: "-rotate-1",
+    offset: "md:-translate-y-4",
+    delay: "0ms",
+  },
   {
     title: "死侍與金鋼狼",
     originalTitle: "Deadpool & Wolverine",
@@ -326,7 +338,7 @@ const dramaItems: DramaItem[] = [
     note: "雖然也是劇情漏洞百出，但是把休叔找回來演老狼真的誠意拉滿，爆米花就是爽!!",
     rotate: "rotate-3",
     offset: "md:-translate-y-2",
-    delay: "0ms",
+    delay: "40ms",
   },
   {
     title: "星際異攻隊3",
