@@ -64,7 +64,7 @@ export default function Header({
   const socials: SocialItem[] = [
     {
       label: "YouTube",
-      href: "https://www.youtube.com/@A-HsunJerry",
+      href: "https://www.youtube.com/@IamA-HsunJerry",
       src: "https://cdn.simpleicons.org/youtube/292524",
     },
     {
