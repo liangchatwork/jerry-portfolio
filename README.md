@@ -169,7 +169,7 @@ Chen-Hsun Jerry Liang
 
 * GitHub: [https://github.com/liangchatwork](https://github.com/liangchatwork)
 * Portfolio: [https://liangchatwork.github.io/jerry-portfolio/](https://liangchatwork.github.io/jerry-portfolio/)
-* YouTube: [https://www.youtube.com/@IamA-HsunJerry](https://www.youtube.com/@A-HsunJerry)
+* YouTube: [https://www.youtube.com/@IamA-HsunJerry](https://www.youtube.com/@IamA-HsunJerry)
 * Instagram: [https://www.instagram.com/hsunjerry_liang](https://www.instagram.com/hsunjerry_liang)
 * LinkedIn: [https://www.linkedin.com/in/hsunjerry-liang/](https://www.linkedin.com/in/hsunjerry-liang/)
 * Email: [liangchatwork@gmail.com](mailto:liangchatwork@gmail.com)

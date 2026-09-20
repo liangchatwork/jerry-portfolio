@@ -242,7 +242,7 @@ export default function Resume() {
 
     const timer = window.setTimeout(() => {
       setShowResumePreview(false);
-    }, 1000);
+    }, 30000);
 
     return () => window.clearTimeout(timer);
   }, []);
